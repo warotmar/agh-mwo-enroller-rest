@@ -76,7 +76,7 @@ public class MeetingRestController {
 
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{id}/participants", method = RequestMethod.POST)
 	public ResponseEntity<?> addParticipant(@PathVariable("id") long id, @RequestBody Participant participant){
 		Meeting meeting = meetingService.findById(id);
 		if (meeting == null) {
