@@ -25,7 +25,7 @@ public class MeetingService {
 
 
 
-	public Meeting findByTitle(String title) {
+	public Meeting findByTitle(int title) {
 
 		return (Meeting) connector.getSession().get(Meeting.class, title);
 
