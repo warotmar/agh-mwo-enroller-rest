@@ -2,6 +2,7 @@ package com.company.enroller.persistence;
 
 import java.util.Collection;
 
+import com.company.enroller.model.Participant;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Component;
@@ -42,5 +43,6 @@ public class MeetingService {
 		return meeting;
 
 	}
+
 
 }

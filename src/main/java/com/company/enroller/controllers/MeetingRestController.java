@@ -25,7 +25,6 @@ public class MeetingRestController {
 	MeetingService meetingService;
 
 
-
 	@RequestMapping(value = "", method = RequestMethod.GET)
 
 	public ResponseEntity<?> getMeetings() {
@@ -74,6 +73,30 @@ public class MeetingRestController {
 		meetingService.add(meeting);
 
 		return new ResponseEntity<Meeting>(meeting, HttpStatus.CREATED);
+
+	}
+
+	@RequestMapping(value = "/{id}/participants", method = RequestMethod.POST)
+	public ResponseEntity<?> addParticipant(@PathVariable("id") long id, @RequestBody Participant participant){
+		Meeting meeting = meetingService.findById(id);
+		if (meeting == null) {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+
+		ParticipantService.add(participant);
+
+		return new ResponseEntity<Meeting>(meeting, HttpStatus.CREATED);
+
+	}
+
+
+	@RequestMapping(value = "/{id}/participants", method = RequestMethod.GET)
+	public ResponseEntity<?> getParticipants(@PathVariable("id") long id){
+		Meeting meeting = meetingService.findById(id);
+		if (meeting == null) {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Collection<Participant>>(meeting.getParticipants(), HttpStatus.OK);
 
 	}
 

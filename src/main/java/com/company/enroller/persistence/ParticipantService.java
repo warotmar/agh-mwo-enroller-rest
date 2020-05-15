@@ -19,7 +19,7 @@ import com.company.enroller.model.Participant;
 public class ParticipantService {
 
 
-	Session session;
+	static Session session;
 
 
 	public ParticipantService() {
@@ -45,9 +45,9 @@ public class ParticipantService {
 
 
 
-	public Participant add(Participant participant) {
+	public static Participant add(Participant participant) {
 
-		Transaction transaction = this.session.beginTransaction();
+		Transaction transaction = session.beginTransaction();
 
 		session.save(participant);
 
