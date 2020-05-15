@@ -39,7 +39,7 @@ public class MeetingRestController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 
-	public ResponseEntity<?> getMeeting(@PathVariable("id") int title) {
+	public ResponseEntity<?> getMeeting(@PathVariable("id") Long title) {
 
 		Meeting meeting = meetingService.findByTitle(title);
 
