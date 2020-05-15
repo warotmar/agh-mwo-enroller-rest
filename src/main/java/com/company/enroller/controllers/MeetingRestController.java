@@ -83,8 +83,7 @@ public class MeetingRestController {
 			return new ResponseEntity(HttpStatus.NOT_FOUND);
 		}
 
-		ParticipantService.add(participant);
-
+		meeting.addParticipant(participant);
 		return new ResponseEntity<Meeting>(meeting, HttpStatus.CREATED);
 
 	}
