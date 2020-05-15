@@ -39,9 +39,9 @@ public class MeetingRestController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 
-	public ResponseEntity<?> getMeeting(@PathVariable("id") Long title) {
+	public ResponseEntity<?> getMeeting(@PathVariable("id") Long id) {
 
-		Meeting meeting = meetingService.findByTitle(title);
+		Meeting meeting = meetingService.findById(id);
 
 		if (meeting == null) {
 
@@ -51,6 +51,29 @@ public class MeetingRestController {
 
 
 		return new ResponseEntity<Meeting>(meeting, HttpStatus.OK);
+
+	}
+
+
+	@RequestMapping(value = "", method = RequestMethod.POST)
+
+	public ResponseEntity<?> addMeeting(@RequestBody Meeting meeting) {
+
+		Meeting foundMeeting = MeetingService.findById(meeting.getId());
+
+		if (foundMeeting != null) {
+
+			return new ResponseEntity(
+
+					"Unable to add. A meeting with id " + meeting.getId() + " already exist.",
+
+					HttpStatus.CONFLICT);
+
+		}
+
+		meetingService.add(meeting);
+
+		return new ResponseEntity<Meeting>(meeting, HttpStatus.CREATED);
 
 	}
 

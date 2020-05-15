@@ -11,7 +11,7 @@ import com.company.enroller.model.Meeting;
 @Component("meetingService")
 public class MeetingService {
 
-	DatabaseConnector connector;
+	static DatabaseConnector connector;
 
 	public MeetingService() {
 		connector = DatabaseConnector.getInstance();
@@ -25,9 +25,21 @@ public class MeetingService {
 
 
 
-	public Meeting findByTitle(Long title) {
+	public static Meeting findById(Long id) {
 
-		return (Meeting) connector.getSession().get(Meeting.class, title);
+		return (Meeting) connector.getSession().get(Meeting.class, id);
+
+	}
+
+	public Meeting add(Meeting meeting) {
+
+		Transaction transaction = this.connector.getSession().beginTransaction();
+
+		connector.getSession().save(meeting);
+
+		transaction.commit();
+
+		return meeting;
 
 	}
 
